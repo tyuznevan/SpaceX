@@ -10,12 +10,12 @@
         android:label="SpaceXListFragment"
         tools:layout="@layout/space_x_list_fragment">
         <action
-            android:id="@+id/action_spaceXListFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/action_spaceXListFragment_to_crewFragment"
+            app:destination="@id/crewFragment" />
     </fragment>
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.testcenter.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        android:id="@+id/crewFragment"
+        android:name="com.example.testcenter.ui.CrewFragment"
+        android:label="crew_fragment"
+        tools:layout="@layout/crew_fragment" />
 </navigation>
