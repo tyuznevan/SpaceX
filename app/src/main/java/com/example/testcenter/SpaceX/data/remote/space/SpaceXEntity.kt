@@ -4,15 +4,22 @@ data class SpaceXEntity(val links: LinksEntity?,
                         val name: String?,
                         val cores: List<CoresEntity>?,
                         val success: Boolean?,
-                        val date_utc: String?)
+                        val date_utc: String?,
+                        val id: String?) {
 
 
 
-class LinksEntity(val patch: LinksPatchEntity?)
+    fun dateYear(dateUtc: String?): String {
+        return  "${dateUtc?.get(0)}${dateUtc?.get(1)}${dateUtc?.get(2)}${dateUtc?.get(3)}"
+    }
 
-class LinksPatchEntity(val small: String?,
+}
+
+
+data class LinksEntity(val patch: LinksPatchEntity?)
+
+data class LinksPatchEntity(val small: String?,
                             val large: String?)
 
-class CoresEntity(val flight: Int?)
-
+data class CoresEntity(val flight: Int?)
 

@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testcenter.R
 import com.example.testcenter.SpaceX.SpaceXApp
-//import com.example.testcenter.SpaceX.SpaceXApp
-import com.example.testcenter.SpaceX.data.remote.space.SpaceXApi
 import com.example.testcenter.databinding.SpaceXListFragmentBinding
+import java.security.AccessController.getContext
 
 class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
 
@@ -20,8 +20,15 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
 
     private val binding get() = _binding!!
 
-    private val adapter = MissionsListAdapter()
-    private var myList: RecyclerView? = null
+    private val adapter = MissionsListAdapter { onClick(it) }
+
+    private fun onClick(position: Int) {
+        // создать бандл val argument = bundleOf("prekl" to "shok")
+        adapter.data[position].id
+        Toast.makeText(activity, "тРОЛЛИНГ", Toast.LENGTH_SHORT).show()
+    }
+
+
 
 
     override fun onCreateView(
@@ -45,7 +52,7 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val spaceXListViewModel: SpaceXListViewModel by viewModels()
-        spaceXListViewModel.fetchSpaceXList()
+        spaceXListViewModel.fetchSpaceXList(requireContext())
 
 
 
@@ -53,21 +60,14 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
 
         recyclerView.adapter = adapter
 
-        spaceXListViewModel.spaceXLiveData.observe(viewLifecycleOwner, {
+        spaceXListViewModel.spaceXLiveData.observe(viewLifecycleOwner) {
             adapter.data.addAll(it)
             adapter.notifyDataSetChanged()
-        })
-
-//        adapter.notifyDataSetChanged()
-//
-//
-//
-//        binding.RecView.setOnClickListener {
-//            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
+        }
 
 
     }
+
 
 
     override fun onDestroyView() {
