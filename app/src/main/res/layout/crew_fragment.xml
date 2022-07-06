@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/largeLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
 
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="42.5dp"
         android:text="TextView"
 
 
@@ -43,20 +43,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/dateCrew"
-        app:layout_constraintTop_toBottomOf="@+id/nameCrew" />
+        app:layout_constraintTop_toTopOf="@+id/dateCrew" />
 
     <TextView
         android:id="@+id/flightCrew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/largeLogo"
-        app:layout_constraintTop_toBottomOf="@+id/dateCrew" />
+        app:layout_constraintBottom_toBottomOf="@+id/largeLogo"
+        app:layout_constraintStart_toEndOf="@+id/largeLogo" />
 
     <TextView
         android:id="@+id/details"

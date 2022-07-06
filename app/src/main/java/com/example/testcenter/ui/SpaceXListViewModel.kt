@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.testcenter.SpaceX.SpaceXApp
+import com.example.testcenter.SpaceX.data.remote.space.CrewEntity
 import com.example.testcenter.SpaceX.data.remote.space.SpaceXEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 class SpaceXListViewModel(application: Application) : AndroidViewModel(application) {
 
     val spaceXLiveData = MutableLiveData<List<SpaceXEntity>>()
+    val crewLiveData = MutableLiveData<List<CrewEntity>>()
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
@@ -37,9 +39,21 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
         )
     }
 
-    fun dateYear(dateUtc: String): String {
-        return  "${dateUtc[0]}${dateUtc[1]}${dateUtc[2]}${dateUtc[3]}"
+    fun fetchCrewList(requireContext: Context) {
+
+        compositeDisposable.add(
+            SpaceXApp.getSpaceApi().getCrewList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    crewLiveData.value = it
+                }, {
+                    Toast.makeText(requireContext, "тРОЛЛИНГ", Toast.LENGTH_LONG).show()
+                })
+        )
     }
+
+
 
     private fun changeSpaceXData(arrayList: List<SpaceXEntity>) =
         arrayList.filter{

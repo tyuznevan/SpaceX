@@ -17,5 +17,42 @@
         android:id="@+id/crewFragment"
         android:name="com.example.testcenter.ui.CrewFragment"
         android:label="crew_fragment"
-        tools:layout="@layout/crew_fragment" />
+        tools:layout="@layout/crew_fragment" >
+        <argument android:name="Name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="Logo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="Flight"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="Success"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="Date"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="Details"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="CrewName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="CrewStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="CrewAgency"
+            app:argType="string"
+            app:nullable="true" />
+        <argument android:name="Crew" />
+    </fragment>
 </navigation>

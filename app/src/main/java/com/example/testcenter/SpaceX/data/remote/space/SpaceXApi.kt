@@ -10,4 +10,7 @@ interface SpaceXApi {
     @GET("launches")
     fun getSpaceXList(): Single<ArrayList<SpaceXEntity>>
 
+    @GET("crew")
+    fun getCrewList(): Single<ArrayList<CrewEntity>>
+
 }
