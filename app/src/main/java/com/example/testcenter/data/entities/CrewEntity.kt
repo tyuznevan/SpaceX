@@ -1,4 +1,4 @@
-package com.example.testcenter.SpaceX.data.remote.space
+package com.example.testcenter.data.entities
 
 data class CrewEntity (
     val name: String?,

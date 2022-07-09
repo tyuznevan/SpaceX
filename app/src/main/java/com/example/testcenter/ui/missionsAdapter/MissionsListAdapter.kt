@@ -1,13 +1,14 @@
-package com.example.testcenter.ui
+package com.example.testcenter.ui.missionsAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testcenter.SpaceX.data.remote.space.SpaceXEntity
+import com.example.testcenter.space.SpaceXEntity
 import com.example.testcenter.databinding.RecViewItemBinding
 import coil.load
+import com.example.testcenter.utils.Utils
 
-class MissionsListAdapter(val event: (position: Int) -> Unit): RecyclerView.Adapter<MissionsListAdapter.MissionViewHolder>() {
+class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerView.Adapter<MissionsListAdapter.MissionViewHolder>() {
 
     var data: ArrayList<SpaceXEntity> = arrayListOf()
         set(value) {
@@ -15,17 +16,13 @@ class MissionsListAdapter(val event: (position: Int) -> Unit): RecyclerView.Adap
             notifyDataSetChanged()
         }
 
-    class MissionViewHolder(binding: RecViewItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class MissionViewHolder(val binding: RecViewItemBinding) : RecyclerView.ViewHolder(binding.root){
         val logo = binding.logo
         val name = binding.name
         val success = binding.success
         val coresFlight = binding.coresFlight
         val date = binding.date
-        val k = binding
-
-
     }
-
 
     override fun getItemCount() = data.size
 
@@ -40,25 +37,12 @@ class MissionsListAdapter(val event: (position: Int) -> Unit): RecyclerView.Adap
         holder.name.text = item.name
         holder.coresFlight.text = item.cores?.get(0)?.flight.toString()
         holder.success.text = item.success.toString()
-        holder.date.text = date(item.date_utc.toString())
-
-
-
+        holder.date.text = Utils.getUtcDate(item.date_utc.toString())
         holder.logo.load(item.links?.patch?.small.toString())
 
-        holder.k.root.setOnClickListener{
+        holder.binding.root.setOnClickListener{
             event.invoke(position)
         }
-
     }
-
-    private fun date(dateUtc: String): String {
-        return  "${dateUtc[8]}${dateUtc[9]}-${dateUtc[5]}${dateUtc[6]}-${dateUtc[0]}${dateUtc[1]}${dateUtc[2]}${dateUtc[3]}"
-    }
-
-
-
-
-
 
 }

@@ -6,7 +6,7 @@
     app:startDestination="@+id/spaceXListFragment">
     <fragment
         android:id="@+id/spaceXListFragment"
-        android:name="com.example.testcenter.ui.SpaceXListFragment"
+        android:name="com.example.testcenter.ui.spaceXList.SpaceXListFragment"
         android:label="SpaceXListFragment"
         tools:layout="@layout/space_x_list_fragment">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/crewFragment"
-        android:name="com.example.testcenter.ui.CrewFragment"
+        android:name="com.example.testcenter.ui.crew.CrewFragment"
         android:label="crew_fragment"
         tools:layout="@layout/crew_fragment" >
         <argument android:name="Name"

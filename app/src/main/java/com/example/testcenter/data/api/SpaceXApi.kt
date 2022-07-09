@@ -1,6 +1,7 @@
-package com.example.testcenter.SpaceX.data.remote.space
+package com.example.testcenter.data.api
 
-import io.reactivex.Observable
+import com.example.testcenter.data.entities.CrewEntity
+import com.example.testcenter.space.SpaceXEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 
