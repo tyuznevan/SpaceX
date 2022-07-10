@@ -9,63 +9,65 @@
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/testlogo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:src="@drawable/testlogo" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="200dp"
+        style="@style/mainText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Name"
+        app:layout_constrainedWidth="true"
+        android:paddingEnd="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/logo"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        android:textSize="20sp"/>
+        tools:text="Nameijofhheuiehuergrhguguhurhuhgueruhurhge"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/success"
+        style="@style/usualText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="32dp"
-        android:text="Success"
-
-        app:layout_constraintBottom_toBottomOf="@+id/date"
-        app:layout_constraintStart_toEndOf="@+id/date"
-
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="10dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintStart_toStartOf="@id/date"
+        tools:text="Success" />
 
     <TextView
         android:id="@+id/coresFlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="5"
+        style="@style/usualText"
+        app:layout_constrainedWidth="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-
-
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        app:layout_constraintStart_toStartOf="@+id/success"
+        app:layout_constraintTop_toBottomOf="@+id/success"
+        tools:text="5" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/usualText"
         android:layout_marginBottom="40dp"
-
-        android:text="21.05.2000"
-
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:text="21.05.2000" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

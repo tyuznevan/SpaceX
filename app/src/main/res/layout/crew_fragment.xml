@@ -9,7 +9,6 @@
         android:id="@+id/largeLogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,12 +18,11 @@
         android:id="@+id/nameCrew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-
+        android:paddingRight="20dp"
         android:text="Tjjeffkofklsdmfmvdkljvdvniovewoiveviecoejjjjjjjjjjjjjjjjjjjjjnewvenvevewvfjejj"
-
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/largeLogo"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,40 +31,41 @@
         android:id="@+id/dateCrew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="42.5dp"
-        android:text="TextView"
-
-
-        app:layout_constraintStart_toEndOf="@+id/largeLogo"
-        app:layout_constraintTop_toBottomOf="@+id/nameCrew" />
+        app:layout_constrainedWidth="true"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/nameCrew"
+        app:layout_constraintTop_toBottomOf="@+id/nameCrew"
+        tools:text="21.05.2000" />
 
     <TextView
         android:id="@+id/succesCrew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/dateCrew"
-        app:layout_constraintTop_toTopOf="@+id/dateCrew" />
+        app:layout_constrainedWidth="true"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/dateCrew"
+        app:layout_constraintTop_toBottomOf="@+id/dateCrew"
+        tools:text="Success" />
 
     <TextView
         android:id="@+id/flightCrew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-
-        android:text="TextView"
+        app:layout_constrainedWidth="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/largeLogo"
-        app:layout_constraintStart_toEndOf="@+id/largeLogo" />
+        app:layout_constraintStart_toStartOf="@+id/succesCrew"
+        app:layout_constraintTop_toBottomOf="@+id/succesCrew"
+        tools:text="1" />
 
     <TextView
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="TextView"
+        tools:text="Details"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/largeLogo" />
 
@@ -74,9 +73,10 @@
         android:id="@+id/crewNames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="TextView"
+        tools:text="Names"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details" />
 
@@ -84,6 +84,7 @@
         android:id="@+id/crewStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
@@ -94,6 +95,7 @@
         android:id="@+id/crewAgency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="TextView"

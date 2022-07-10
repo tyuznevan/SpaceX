@@ -37,7 +37,7 @@ class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerV
         val item = data[position]
 
         holder.name.text = item.name
-        holder.coresFlight.text = ((item.cores?.get(0)?.flight) ?: 0).toString()
+        holder.coresFlight.text = "Value of main core flight: ${((item.cores?.get(0)?.flight) ?: 0).toString()}"
         holder.success.text = makeSuccessLabel(item.success)
         holder.date.text = Utils.getUtcDate(item.date_utc.toString())
         holder.logo.load(item.links?.patch?.small.toString())

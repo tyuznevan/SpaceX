@@ -12,9 +12,9 @@ object Utils {
 
     fun makeSuccessLabel(success: Boolean?) =
         when(success) {
-            true ->  "Success"
-            false -> "Not Success"
-            else -> "Undefined"
+            true ->  "Status: Success"
+            false -> "Status: Not Success"
+            else -> "Status: Undefined"
         }
 
 

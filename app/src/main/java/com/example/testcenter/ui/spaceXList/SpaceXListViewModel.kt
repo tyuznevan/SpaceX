@@ -82,7 +82,7 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
             NAME_KEY to spaceXLiveData.value?.get(position)?.name,
             FLIGHT_KEY to
                     spaceXLiveData.value?.get(position)?.cores?.get(0)?.flight,
-            SUCCESS_KEY to spaceXLiveData.value?.get(position)?.success.toString(),
+            SUCCESS_KEY to spaceXLiveData.value?.get(position)?.success,
             DATE_KEY to Utils.getUtcDate(spaceXLiveData.value?.get(position)?.date_utc.toString()),
             DETAILS_KEY to spaceXLiveData.value?.get(position)?.details,
             CREWNAME_KEY to getCrewName(spaceXLiveData.value?.get(position)?.crew, crewData),

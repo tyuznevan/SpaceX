@@ -40,15 +40,17 @@ class CrewFragment : Fragment(R.layout.crew_fragment) {
     }
 
     private fun initView() {
-        binding.largeLogo.load(arguments?.getString(SpaceXListViewModel.LOGO_KEY))
+        val defaultImage = "https://flyclipart.com/thumbs/sticker-risitas-elon-musk-fume-joint-cigarette-rsa-elon-musk-hitting-the-blunt-1080143.png"
+        binding.largeLogo.load((arguments?.getString(SpaceXListViewModel.LOGO_KEY))?: defaultImage)
         binding.nameCrew.text = arguments?.getString(SpaceXListViewModel.NAME_KEY)
-        binding.flightCrew.text = (arguments?.getInt(SpaceXListViewModel.FLIGHT_KEY) ?: 0).toString()
+        binding.flightCrew.text = "Value of launches: ${(arguments?.getInt(SpaceXListViewModel.FLIGHT_KEY) ?: 0).toString()}"
         binding.succesCrew.text = Utils.makeSuccessLabel(arguments?.getBoolean(SpaceXListViewModel.SUCCESS_KEY))
         binding.dateCrew.text = arguments?.getString(SpaceXListViewModel.DATE_KEY)
         binding.details.text = arguments?.getString(SpaceXListViewModel.DETAILS_KEY)
         binding.crewNames.text = arguments?.getString(SpaceXListViewModel.CREWNAME_KEY)
         binding.crewStatus.text = arguments?.getString(SpaceXListViewModel.CREWSTATUS_KEY)
         binding.crewAgency.text = arguments?.getString(SpaceXListViewModel.CREWAGENCY_KEY)
+
 
     }
 
