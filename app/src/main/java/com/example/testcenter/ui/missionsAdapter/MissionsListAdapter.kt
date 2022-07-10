@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testcenter.space.SpaceXEntity
 import com.example.testcenter.databinding.RecViewItemBinding
 import coil.load
+import com.example.testcenter.ui.spaceXList.SpaceXListViewModel
 import com.example.testcenter.utils.Utils
+import com.example.testcenter.utils.Utils.makeSuccessLabel
 
 class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerView.Adapter<MissionsListAdapter.MissionViewHolder>() {
 
@@ -35,8 +37,8 @@ class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerV
         val item = data[position]
 
         holder.name.text = item.name
-        holder.coresFlight.text = item.cores?.get(0)?.flight.toString()
-        holder.success.text = item.success.toString()
+        holder.coresFlight.text = ((item.cores?.get(0)?.flight) ?: 0).toString()
+        holder.success.text = makeSuccessLabel(item.success)
         holder.date.text = Utils.getUtcDate(item.date_utc.toString())
         holder.logo.load(item.links?.patch?.small.toString())
 
@@ -44,5 +46,7 @@ class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerV
             event.invoke(position)
         }
     }
+
+
 
 }

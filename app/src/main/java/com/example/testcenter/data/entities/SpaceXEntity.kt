@@ -10,14 +10,6 @@ data class SpaceXEntity(
     val details: String?
     )
 
-    {
-        //в object utils
-    fun dateYear(dateUtc: String?): String {
-        return  "${dateUtc?.get(0)}${dateUtc?.get(1)}${dateUtc?.get(2)}${dateUtc?.get(3)}"
-    }
-
-}
-
 data class LinksEntity(val patch: LinksPatchEntity?)
 
 data class LinksPatchEntity(val small: String?,

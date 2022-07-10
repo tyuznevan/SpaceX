@@ -11,6 +11,7 @@ import coil.load
 import com.example.testcenter.R
 import com.example.testcenter.databinding.CrewFragmentBinding
 import com.example.testcenter.ui.spaceXList.SpaceXListViewModel
+import com.example.testcenter.utils.Utils
 
 class CrewFragment : Fragment(R.layout.crew_fragment) {
 
@@ -38,21 +39,17 @@ class CrewFragment : Fragment(R.layout.crew_fragment) {
         _binding = null
     }
 
-    fun initView() {
-        //TODO:
-        val nameText = binding.nameCrew
-        val flight = binding.flightCrew
-        val success = binding.succesCrew
-        val date = binding.dateCrew
-        val details = binding.details
-
-        //TODO:
+    private fun initView() {
         binding.largeLogo.load(arguments?.getString(SpaceXListViewModel.LOGO_KEY))
-        nameText.text = arguments?.getString("Name")
-        flight.text = arguments?.getString("Flight")
-        success.text = arguments?.getString("Success")
-        date.text = arguments?.getString("Date")
-        details.text = arguments?.getString("Details")
+        binding.nameCrew.text = arguments?.getString(SpaceXListViewModel.NAME_KEY)
+        binding.flightCrew.text = (arguments?.getInt(SpaceXListViewModel.FLIGHT_KEY) ?: 0).toString()
+        binding.succesCrew.text = Utils.makeSuccessLabel(arguments?.getBoolean(SpaceXListViewModel.SUCCESS_KEY))
+        binding.dateCrew.text = arguments?.getString(SpaceXListViewModel.DATE_KEY)
+        binding.details.text = arguments?.getString(SpaceXListViewModel.DETAILS_KEY)
+        binding.crewNames.text = arguments?.getString(SpaceXListViewModel.CREWNAME_KEY)
+        binding.crewStatus.text = arguments?.getString(SpaceXListViewModel.CREWSTATUS_KEY)
+        binding.crewAgency.text = arguments?.getString(SpaceXListViewModel.CREWAGENCY_KEY)
+
     }
 
 }

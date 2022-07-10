@@ -16,18 +16,14 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
 
     private var _binding: SpaceXListFragmentBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: SpaceXListViewModel by viewModels()
-
-    private val adapter = MissionsListAdapter { onClick(it) }
-
-    private fun onClick(position: Int) {
-        viewModel.fetchCrewList(position)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchSpaceXList()
+        if (!viewModel.rotationState) {
+            viewModel.fetchSpaceXList()
+        }
+        viewModel.rotationState = true
     }
 
     override fun onCreateView(
@@ -36,13 +32,9 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
     ): View {
         _binding = SpaceXListFragmentBinding.inflate(inflater, container, false)
         val recyclerView = binding.RecView
-        recyclerView.adapter = adapter
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        recyclerView.adapter = viewModel.adapter
         initObservers()
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -52,8 +44,8 @@ class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
 
     private fun initObservers() {
         viewModel.spaceXLiveData.observe(viewLifecycleOwner) {
-            adapter.data.addAll(it)
-            adapter.notifyDataSetChanged()
+            viewModel.adapter.data.addAll(it)
+            viewModel.adapter.notifyDataSetChanged()
         }
 
         viewModel.navigateToCrewScreen.observe(viewLifecycleOwner) {

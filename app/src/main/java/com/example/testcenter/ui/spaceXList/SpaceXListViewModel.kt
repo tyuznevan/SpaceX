@@ -2,10 +2,13 @@ package com.example.testcenter.ui.spaceXList
 
 import android.app.Application
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.example.testcenter.data.api.SpaceXRetrofit
 import com.example.testcenter.data.entities.CrewEntity
 import com.example.testcenter.space.SpaceXEntity
+import com.example.testcenter.ui.missionsAdapter.MissionsListAdapter
 import com.example.testcenter.utils.SingleLiveEvent
 import com.example.testcenter.utils.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,13 +21,21 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
     val spaceXLiveData = SingleLiveEvent<List<SpaceXEntity>>()
     val navigateToCrewScreen = SingleLiveEvent<Bundle>()
     var crewData: ArrayList<CrewEntity>? = null
-    val year = "2021"
+    private val year = "2021"
+
+    var rotationState = false
 
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()
+    }
+
+    val adapter = MissionsListAdapter { onClick(it) }
+
+    fun onClick(position: Int) {
+        fetchCrewList(position)
     }
 
     fun fetchSpaceXList() {
@@ -34,7 +45,6 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-
                     spaceXLiveData.value =
                         changeSpaceXData(it)
                 }, {
@@ -45,7 +55,7 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
 
     private fun changeSpaceXData(data: List<SpaceXEntity>) =
         data.filter {
-            (it.dateYear(it.date_utc) >= year) ?: false
+            (Utils.dateYear(it.date_utc) >= year) ?: false
         }.sortedByDescending { it.date_utc }
 
     fun fetchCrewList(position: Int) {
@@ -66,23 +76,92 @@ class SpaceXListViewModel(application: Application) : AndroidViewModel(applicati
     }
 
 
-    fun makeArguments(position: Int): Bundle {
-        //TODO
-        val bundle = Bundle()
-        bundle.putString(LOGO_KEY, spaceXLiveData.value?.get(position)?.links?.patch?.large)
-        bundle.putString("Name", spaceXLiveData.value?.get(position)?.name)
-        bundle.putString(
-            "Flight",
-            spaceXLiveData.value?.get(position)?.cores?.get(0)?.flight.toString()
+    private fun makeArguments(position: Int): Bundle {
+        return bundleOf(
+            LOGO_KEY to spaceXLiveData.value?.get(position)?.links?.patch?.large,
+            NAME_KEY to spaceXLiveData.value?.get(position)?.name,
+            FLIGHT_KEY to
+                    spaceXLiveData.value?.get(position)?.cores?.get(0)?.flight,
+            SUCCESS_KEY to spaceXLiveData.value?.get(position)?.success.toString(),
+            DATE_KEY to Utils.getUtcDate(spaceXLiveData.value?.get(position)?.date_utc.toString()),
+            DETAILS_KEY to spaceXLiveData.value?.get(position)?.details,
+            CREWNAME_KEY to getCrewName(spaceXLiveData.value?.get(position)?.crew, crewData),
+            CREWSTATUS_KEY to getCrewStatus(spaceXLiveData.value?.get(position)?.crew, crewData),
+            CREWAGENCY_KEY to getCrewAgency(spaceXLiveData.value?.get(position)?.crew, crewData)
         )
-        bundle.putString("Success", spaceXLiveData.value?.get(position)?.success.toString())
-        bundle.putString("Date", Utils.getUtcDate(spaceXLiveData.value?.get(position)?.date_utc.toString()))
-        bundle.putString("Details", spaceXLiveData.value?.get(position)?.details)
-
-        return bundle
     }
-    companion object{
-        val LOGO_KEY = "LOGO_KEY"
+
+    private fun getCrewAgency(crewList: ArrayList<String>?, crewData: ArrayList<CrewEntity>?): String {
+        val i: Int = 0
+        var res: String = ""
+        crewList?.map {
+            res += " ${findCrewAgencyById(it, crewData)}"
+        }
+        return res
+    }
+
+    private fun findCrewAgencyById(idString: String, crewData: ArrayList<CrewEntity>?): String {
+        var result: String = ""
+        crewData?.map {
+            if (idString == it.id){
+                result = it.agency.toString()
+            }
+        }
+        return result
+    }
+
+    private fun getCrewStatus(crewList: ArrayList<String>?, crewData: ArrayList<CrewEntity>?): String {
+        val i: Int = 0
+        var res: String = ""
+        crewList?.map {
+            res += " ${findCrewStatusById(it, crewData)}"
+        }
+        return res
+    }
+
+    private fun findCrewStatusById(idString: String, crewData: ArrayList<CrewEntity>?): String {
+        var result: String = ""
+        crewData?.map {
+            if (idString == it.id){
+                result = it.status.toString()
+            }
+        }
+        return result
+    }
+
+    private fun getCrewName(crewList: ArrayList<String>?, crewData: ArrayList<CrewEntity>?): String {
+        val i: Int = 0
+        var res: String = ""
+        crewList?.map {
+            res += " ${findCrewNameById(it, crewData)}"
+        }
+        return res
+    }
+
+    private fun findCrewNameById(idString: String, crewData: ArrayList<CrewEntity>?): String {
+        var result: String = ""
+        crewData?.map {
+            if (idString == it.id){
+                result = it.name.toString()
+            }
+        }
+        return result
+
+    }
+
+    companion object {
+        const val LOGO_KEY = "LOGO_KEY"
+        const val NAME_KEY = "NAME_KEY"
+        const val FLIGHT_KEY = "FLIGHT_KEY"
+        const val SUCCESS_KEY = "SUCCESS_KEY"
+        const val DATE_KEY = "DATE_KEY"
+        const val DETAILS_KEY = "DETAILS_KEY"
+        const val CREWNAME_KEY = "CREWNAME_KEY"
+        const val CREWSTATUS_KEY = "CREWSTATUS_KEY"
+        const val CREWAGENCY_KEY = "CREWAGENCY_KEY"
+
+
+
     }
 
 }
