@@ -1,4 +1,4 @@
-package com.example.testcenter.space
+package com.example.testcenter.data.entities
 
 data class SpaceXEntity(
     val links: LinksEntity?,

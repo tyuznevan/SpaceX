@@ -9,10 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.testcenter.R
 import com.example.testcenter.databinding.SpaceXListFragmentBinding
-import com.example.testcenter.ui.missionsAdapter.MissionsListAdapter
 
 class SpaceXListFragment : Fragment(R.layout.space_x_list_fragment) {
-
 
     private var _binding: SpaceXListFragmentBinding? = null
     private val binding get() = _binding!!

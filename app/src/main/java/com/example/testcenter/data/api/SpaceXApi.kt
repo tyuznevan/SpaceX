@@ -1,7 +1,7 @@
 package com.example.testcenter.data.api
 
 import com.example.testcenter.data.entities.CrewEntity
-import com.example.testcenter.space.SpaceXEntity
+import com.example.testcenter.data.entities.SpaceXEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 

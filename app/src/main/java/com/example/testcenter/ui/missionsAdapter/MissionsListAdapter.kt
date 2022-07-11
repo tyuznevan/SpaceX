@@ -3,10 +3,9 @@ package com.example.testcenter.ui.missionsAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testcenter.space.SpaceXEntity
+import com.example.testcenter.data.entities.SpaceXEntity
 import com.example.testcenter.databinding.RecViewItemBinding
 import coil.load
-import com.example.testcenter.ui.spaceXList.SpaceXListViewModel
 import com.example.testcenter.utils.Utils
 import com.example.testcenter.utils.Utils.makeSuccessLabel
 
@@ -40,13 +39,12 @@ class MissionsListAdapter(private val event: (position: Int) -> Unit): RecyclerV
         holder.coresFlight.text = "Value of main core flight: ${((item.cores?.get(0)?.flight) ?: 0).toString()}"
         holder.success.text = makeSuccessLabel(item.success)
         holder.date.text = Utils.getUtcDate(item.date_utc.toString())
-        holder.logo.load(item.links?.patch?.small.toString())
+        val defaultImage = "https://www.wowza.com/uploads/enterprises/spacex_smalldark.png"
+        holder.logo.load(item.links?.patch?.small ?: defaultImage)
 
         holder.binding.root.setOnClickListener{
             event.invoke(position)
         }
     }
-
-
 
 }
